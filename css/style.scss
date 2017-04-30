@@ -1,0 +1,224 @@
+/* BOX SIZING */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
+}
+
+
+
+/* VARIABLES */
+$color-body: #476da5;
+$border-color: #808c99;
+$font-family: Helvetica, sans-serif;
+$font-size: 14px;
+
+$line-height--small: 1.2;
+$line-height--medium: 1.8;
+$line-height--large: 2.2;
+
+
+$device--small: 480px;
+$device--medium: 720px;
+$device--large: 1020px;
+$device--xlarge: 1200px;
+
+$primary-color: #304352;
+$secondary-color: #d7d2cc;
+$background-color: #f8f9fa;
+$module-breakpoint: 2em;
+
+@mixin border ($border-type: solid, $radius: 5px) {
+    border: 1px $border-type $primary-color;
+    border-radius: $radius;
+    -moz-border-radius: $radius;
+    -webkit-border-radius: $radius;
+    -ms-border-radius: $radius;
+}
+
+/*  HTML & BODY */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  color: $color-body;
+  font-family: $font-family;
+  font-size: $font-size;
+  line-height: $line-height--medium;
+  background: $background-color;
+
+}
+
+input,span,select {
+    display:inine-block;
+    vertical-align:middle;
+    font-size:13px;
+}
+
+input,select{
+    width:80px;
+    color:#999;
+    border:1px solid #999;
+}
+
+input{
+    padding:0 10px;
+    height:30px;/* uses normal box model */
+}
+
+select{/* height,line-height and padding can't be changed at all in IE6 and 7*/
+    padding:7px 2px 5px 10px;
+    height:32px;/* uses border box model (so padding and borders are included inside the width and height)*/
+    width:160px;
+    line-height:26px;/* webkit mac doesn't use height but fiddle with line-height until it looks right*/
+    background:transparent;/* if you change the background then safari and chrome mac will use height !!!!*/
+    color: $color-body;
+}
+
+.grid {
+    margin: 1em;
+    padding: 1.5em 1em;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    @include border(solid, 10px);
+
+    .column {
+        flex: 1 0 $module-breakpoint;
+
+        &.poster {
+            margin-bottom: 1em;
+            img {
+                padding: 1em;
+            }
+        }
+
+        &.right {
+            text-align: right;
+        }
+
+        &.metadata {
+            .detail {
+                min-height: 205px;
+                span {
+                    display: inline-block;
+                    font-size: 12px;
+                    vertical-align: top;
+                    &:nth-child(1) {
+                        font-weight: bold;
+                        width: 20%;
+                        &::after {
+                            content: ":";
+                            font-weight: bold;
+                            float: right;
+                            padding-right: 10px;
+                        }
+                    }
+
+                    &:nth-child(2) {
+
+                        width: 80%;
+                    }
+                }
+            }
+        }
+        &.carousel {
+            &.slider {
+
+                .slick-slide {
+                    margin: 0px 20px;
+                }
+
+                .slick-prev:before,
+                .slick-next:before {
+                    color: black !important;
+                }
+            }
+        }
+    }
+}
+
+
+//iPad, tablet in landscape
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px),
+only screen and (min-device-width: 992px)  {
+    .grid {
+        .column {
+            &.metadata {
+                .title,
+                .detail {
+                    @include border(solid, 5px);
+                    padding: 1em;
+                }
+            }
+
+            &.carousel {
+                &.slider {
+                    width: 50%;
+                    margin: 100px auto;
+                }
+            }
+        }
+    }
+}
+
+
+//iPad, tablet in portrait
+@media only screen  and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait),
+only screen and (max-device-width: 992px),
+only screen and (min-width: 320px) and (max-width: 480px) {
+
+  //CSS
+
+  .grid {
+      flex-direction: column-reverse;
+      margin: 0.5em;
+      .column {
+          &.right {
+              .dropdown {
+                  width: 100%;
+              }
+          }
+
+          &.metadata {
+              .title,
+              .detail {
+                  @include border(dotted, 5px);
+                  padding: 0 1em;
+
+              }
+
+              .title {
+                  text-align: center;
+              }
+          }
+
+          &.carousel {
+              &.slider {
+                  width: 100%;
+                  margin: 100px auto;
+                  img {
+                      width: 100%;
+                  }
+              }
+          }
+      }
+  }
+}
