@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--[if lte IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    	<meta name="description" content="">
+        <title>Web Movies</title>
+        <base href="/">
+        <link rel="stylesheet" type="text/css" href="css/styles.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/lib/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="css/lib/slick-theme.css"/>
+
+
+
+        <script src="js/lib/jquery-2.2.4.min.js"></script>
+        <script src="js/lib/jquery.ajax-cross-origin.min.js"></script>
+        <script src="js/lib/slick.js"></script>
+        <script src="js/scripts.js"></script>
+
+
+
+    </head>
+    <body>
+        <section class="grid">
+            <div class="column poster">
+                <img src="http://placehold.it/300x300"/>
+            </div>
+            <div class="column metadata">
+                <h2 class="title">Title</h2>
+                <p class="detail">
+                    Movie metadata: release data, plot, rating, director, actor, etc..
+                </p>
+            </div>
+        </section>
+
+        <section class="grid">
+            <div class="column right">
+                <select class="dropdown" id="genre" placeholder="Genre">
+                    <option>Select Genre</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="grid ">
+            <div class="column carousel slider">
+            </div>
+        </section>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var controller = BootStrapApp.init($('body'));
+                controller.loadCarousel();
+            });
+        </script>
+
+    </body>
+</html>
